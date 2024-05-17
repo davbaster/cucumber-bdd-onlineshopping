@@ -15,11 +15,12 @@
             <version>5.7.2</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.microfocus.adm.almoctane.bdd</groupId>
-            <artifactId>octane-cucumber-jvm</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+         <!-- https://mvnrepository.com/artifact/com.microfocus.adm.almoctane.bdd/bdd2octane -->
+         <dependency>
+             <groupId>com.microfocus.adm.almoctane.bdd</groupId>
+             <artifactId>bdd2octane</artifactId>
+             <version>1.1.7</version>
+         </dependency>
         <!-- Add other necessary dependencies for Cucumber, Java, etc. -->
     </dependencies>
 
