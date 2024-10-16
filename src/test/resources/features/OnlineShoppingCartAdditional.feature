@@ -9,7 +9,7 @@ Feature: Online Shopping Cart Additional Scenarios
     And I have an empty shopping cart
     When I add "Blue T-shirt" to the cart 3 times
     Then the cart should contain 3 items
-    And the cart should display "Blue T-shirt" with quantity "3"
+    And the cart should display "Blue T-shirt" with quantity 3
 
   Scenario: Verifying total price of items in the cart
     Given I am a logged-in customer
