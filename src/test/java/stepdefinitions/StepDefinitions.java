@@ -73,9 +73,10 @@ public class StepDefinitions {
         double totalPrice = calculateTotalPrice(shoppingCart);
         // Convert the expectedPrice (String) to double after removing the dollar sign
         double expectedPriceAsDouble = Double.parseDouble(expectedPrice.replace("$", ""));
-        // Using a delta of 0.01 for floating-point comparison
-        Assertions.assertEquals(expectedPriceAsDouble, totalPrice, 0.01, "Total price is incorrect.");
+        // Explicitly cast totalPrice to double for comparison to avoid ambiguity
+        Assertions.assertEquals((double) expectedPriceAsDouble, (double) totalPrice, 0.01, "Total price is incorrect.");
     }
+
 
 
     @Then("the cart should display {string} with quantity {int}")
