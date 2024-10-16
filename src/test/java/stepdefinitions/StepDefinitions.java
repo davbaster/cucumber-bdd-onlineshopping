@@ -57,17 +57,36 @@ public class StepDefinitions {
         }
     }
 
+    @When("I add {string} priced at {string} to the cart")
+    public void i_add_priced_at_to_the_cart(String item, String price) {
+        shoppingCart.add(item);
+        double itemPrice = Double.parseDouble(price.replace("$", ""));
+        priceMap.put(item, itemPrice); // Update the price in the priceMap
+    }
+
     @Then("the cart should contain {int} items")
     public void the_cart_should_contain_items(Integer itemCount) {
-        // Manual check for the number of items
         if (shoppingCart.size() != itemCount) {
             throw new AssertionError("The number of items in the cart is incorrect. Expected: " + itemCount + " but got: " + shoppingCart.size());
         }
     }
 
+    @Then("the cart should contain {int} item")
+    public void the_cart_should_contain_item(Integer itemCount) {
+        if (shoppingCart.size() != itemCount) {
+            throw new AssertionError("The number of items in the cart is incorrect. Expected: " + itemCount + " but got: " + shoppingCart.size());
+        }
+    }
+
+    @Then("the cart should display {string}")
+    public void the_cart_should_display(String item) {
+        if (!shoppingCart.contains(item)) {
+            throw new AssertionError("The cart does not contain the expected item: " + item);
+        }
+    }
+
     @Then("the cart should display {string} and {string}")
     public void the_cart_should_display_and(String firstItem, String secondItem) {
-        // Manual check for items in the cart
         if (!(shoppingCart.contains(firstItem) && shoppingCart.contains(secondItem))) {
             throw new AssertionError("The cart does not contain the expected items: " + firstItem + " and " + secondItem);
         }
@@ -76,10 +95,7 @@ public class StepDefinitions {
     @Then("the total price of the cart should be {string}")
     public void the_total_price_of_the_cart_should_be(String expectedPrice) {
         double totalPrice = calculateTotalPrice(shoppingCart);
-        // Convert the expectedPrice (String) to double after removing the dollar sign
         double expectedPriceAsDouble = Double.parseDouble(expectedPrice.replace("$", ""));
-        
-        // Manual comparison for total price
         if (Math.abs(totalPrice - expectedPriceAsDouble) > 0.01) {
             throw new AssertionError("Total price is incorrect. Expected: $" + expectedPriceAsDouble + ", but got: $" + totalPrice);
         }
@@ -88,7 +104,6 @@ public class StepDefinitions {
     @Then("the cart should display {string} with quantity {int}")
     public void the_cart_should_display_with_quantity(String item, Integer quantity) {
         long count = shoppingCart.stream().filter(i -> i.equals(item)).count();
-        // Manual check for the quantity of the item
         if (count != quantity) {
             throw new AssertionError("The quantity of the item in the cart is incorrect. Expected: " + quantity + " but got: " + count);
         }
