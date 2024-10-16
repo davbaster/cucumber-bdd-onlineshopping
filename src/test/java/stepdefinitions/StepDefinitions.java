@@ -45,6 +45,11 @@ public class StepDefinitions {
         shoppingCart.add(item);
     }
 
+    @When("I add a {string} to the cart")
+    public void i_add_a_to_the_cart(String item) {
+        shoppingCart.add(item);
+    }
+
     @When("I remove the {string} from the cart")
     public void i_remove_the_from_the_cart(String item) {
         shoppingCart.remove(item);
