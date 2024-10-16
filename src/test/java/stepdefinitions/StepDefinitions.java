@@ -71,7 +71,9 @@ public class StepDefinitions {
     @Then("the total price of the cart should be {string}")
     public void the_total_price_of_the_cart_should_be(String expectedPrice) {
         double totalPrice = calculateTotalPrice(shoppingCart);
-        Assertions.assertEquals(expectedPrice, "$" + totalPrice, "Total price is incorrect.");
+        // Convert the expectedPrice (String) to double after removing the dollar sign
+        double expectedPriceAsDouble = Double.parseDouble(expectedPrice.replace("$", ""));
+        Assertions.assertEquals(expectedPriceAsDouble, totalPrice, "Total price is incorrect.");
     }
 
     @Then("the cart should display {string} with quantity {int}")
